@@ -29,9 +29,17 @@
     "url": "git+https://github.com/junforever/n8n-text-shield.git"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^24.0.12",
+    "@types/sqlstring": "^2.3.2",
     "gulp": "^5.0.1",
     "n8n-workflow": "^1.82.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.6",
+    "jsdom": "^26.1.0",
+    "sqlstring": "^2.3.3"
   }
 }
