@@ -1,0 +1,37 @@
+{
+  "name": "n8n-text-shield",
+  "version": "1.0.0",
+  "description": "n8n community node for sanitize text input",
+  "license": "MIT",
+  "author": "junforever",
+  "main": "dist/nodes/TextShield/TextShield.node.js",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "n8n",
+    "n8n-community-node",
+    "text-shield",
+    "sanitize"
+  ],
+  "scripts": {
+    "build": "tsc && gulp build:icons"
+  },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [],
+    "nodes": [
+      "dist/nodes/TextShield/TextShield.node.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junforever/n8n-text-shield.git"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12",
+    "gulp": "^5.0.1",
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.8.3"
+  }
+}
