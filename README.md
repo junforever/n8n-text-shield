@@ -5,7 +5,7 @@ An n8n community node designed to sanitize text inputs, protecting your workflow
 ## Features
 
 - **XSS Protection:** Sanitizes input text to remove malicious HTML and JavaScript code using the robust `DOMPurify` library.
-- **SQL Injection Protection:** Optionally escapes input text to prevent SQL injection attacks, powered by `sqlstring`. This feature can be toggled on or off.
+- **SQL Injection Protection:** Optionally sanitizes input text to prevent SQL injection attacks by removing common SQL statements using a regular expression. This feature can be toggled on or off.
 - **Preserves Data Context:** The node seamlessly integrates into your workflow by cloning the original data and adding the sanitized text as a new field, ensuring no data is lost.
 - **Flexible Configuration:** Allows you to specify which field to sanitize and what to name the new output field.
 - **Integrated Error Handling:** Works directly with n8n's built-in "Continue on Fail" setting for robust and straightforward error management.
@@ -51,7 +51,7 @@ This node is built upon these excellent open-source libraries:
 
 - [DOMPurify](https://github.com/cure53/DOMPurify) for XSS sanitization.
 - [JSDOM](https://github.com/jsdom/jsdom) to provide a virtual DOM environment for DOMPurify.
-- [sqlstring](https://github.com/mysqljs/sqlstring) for escaping SQL strings.
+
 
 ## License
 

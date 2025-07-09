@@ -1,12 +1,21 @@
 import { IExecuteFunctions } from 'n8n-workflow';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
-import { escape } from 'sqlstring';
 import {
   INodeExecutionData,
   INodeType,
   INodeTypeDescription,
 } from 'n8n-workflow';
+
+const sanitizeSQL = (input: string): string => {
+  const sqlPatternString = `\\b(SELECT\\s+\\*.*?;|SELECT\\s*\\(.*\\).*?;|INSERT\\s+INTO\\s+.*?;|DELETE\\s+FROM\\s+.*?;|UPDATE\\s+\\w+\\s+SET\\s+.*?;|DROP\\s+TABLE\\s+.*?;|TRUNCATE\\s+TABLE\\s+.*?;|ALTER\\s+TABLE\\s+.*?;|CREATE\\s+TABLE\\s+.*?;|EXEC\\s*\\(?.*?\\)?;?|EXECUTE\\s*\\(?.*?\\)?;?|CALL\\s+\\w+\\s*\\(?.*?\\)?;?|SLEEP\\s*\\(.*?\\);?|LOAD_FILE\\s*\\(.*?\\);?|INTO\\s+OUTFILE\\s+['\"].*?['\"];?|GRANT\\s+.*?;|REVOKE\\s+.*?;|UNION\\s+SELECT\\s+.*?;|MERGE\\s+.*?;|WITH\\s+.*?AS\\s*\\(.*\\).*?;)`;
+
+  const sqlRemovalPattern = new RegExp(sqlPatternString, 'gis');
+
+  const sanitizedText = input.replace(sqlRemovalPattern, '').trim();
+
+  return sanitizedText;
+};
 
 export class TextShield implements INodeType {
   description: INodeTypeDescription = {
@@ -80,7 +89,7 @@ export class TextShield implements INodeType {
         let sanitizedText = DOMPurify.sanitize(textToSanitize);
 
         if (sanitizeSql) {
-          sanitizedText = escape(sanitizedText);
+          sanitizedText = sanitizeSQL(sanitizedText);
         }
 
         const newItem: INodeExecutionData = {
