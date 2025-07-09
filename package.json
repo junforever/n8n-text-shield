@@ -1,5 +1,5 @@
 {
-  "name": "n8n-text-shield",
+  "name": "n8n-nodes-text-shield",
   "version": "1.0.0",
   "description": "n8n community node for sanitize text input",
   "license": "MIT",
